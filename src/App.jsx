@@ -1,24 +1,24 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import Header from "./components/Header";
+import Home from "./pages/Home";
 import "./App.scss";
-import { Login, Register, PageNotFound, Home } from "./pages/Index";
-import { AuthContext } from "./context/AuthContext";
-import { useContext } from "react";
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Albums from "./pages/Albums";
+import AddAlbum from "./pages/AddAlbum";
 function App() {
-  const { currenUser } = useContext(AuthContext);
-  const ProtectedRoute = ({ children }) => {
-    if (currenUser === {}) {
-      return <Navigate to="/register"></Navigate>;
-    }
-
-    return children;
-  };
-  return <div className="App">Hello</div>;
+  return (
+    <div className="App">
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/">
+            <Route index path="" element={<Home />} />
+            <Route path="albums" element={<Albums />} />
+            <Route path="addAlbum" element={<AddAlbum />} />
+          </Route>
+        </Routes>
+      </Router>
+    </div>
+  );
 }
 
 export default App;
