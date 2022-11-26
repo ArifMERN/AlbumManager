@@ -7,7 +7,7 @@ export const AlbumContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   // const [updatedAlbum,setUpdatedAlbum]= useState([]);
   const changeInAlbums = (updatedAlbum) => {
-    setAlbums(updatedAlbum);
+    setAlbums([...updatedAlbum]);
   };
   const getAlbums = async () => {
     setLoading(true);

@@ -4,7 +4,7 @@ import { AlbumContext } from "../context/AlbumContext";
 
 const Albums = () => {
   const { albums, loading } = useContext(AlbumContext);
-  // console.log(albums);
+  // console.log(albums.id);
 
   return (
     <div>

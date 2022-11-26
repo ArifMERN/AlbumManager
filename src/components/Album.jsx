@@ -10,7 +10,7 @@ const Album = (album) => {
   // handle Delete to delete the item.
   const handleDelete = async (id) => {
     try {
-      await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      await fetch(`https://jsonplaceholder.typicode.com/posts/1`, {
         method: "DELETE",
       }).then((response) => {
         response.json().then((data) => {
@@ -42,11 +42,11 @@ const Album = (album) => {
   // console.log(album);
   const handleSave = async (id) => {
     let info = {
-      id: id,
+      id: albums.length + 1,
       title: inputData,
       userId: 10,
     };
-    await fetch(`https://jsonplaceholder.typicode.com/albums/${id}`, {
+    await fetch(`https://jsonplaceholder.typicode.com/albums/1`, {
       method: "PUT",
       body: JSON.stringify(info),
       headers: {
@@ -55,13 +55,10 @@ const Album = (album) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        let updatedAlbums = albums.filter((album) => {
-          console.log(album);
-          return album.id != id;
-        });
-        updatedAlbums.push(data);
+        let updatedAlbums = albums;
+
+        updatedAlbums.find((a) => a.id === id).title = inputData;
         changeInAlbums(updatedAlbums);
-        alert("album updated");
       });
 
     let ele = document.getElementById(id).childNodes[0];
@@ -74,8 +71,8 @@ const Album = (album) => {
   const handleEnter = (e, id) => {
     if (e.key === "Enter") handleSave(id);
   };
-
-  // console.log(index);
+  // useEffect({}, []);
+  // console.log(album.id);
   return (
     <div className="album" id={album.id}>
       <div className="albumData">
