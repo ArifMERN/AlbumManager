@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { AlbumContext } from "../context/AlbumContext";
 import { useNavigate } from "react-router";
 
@@ -6,7 +6,9 @@ const AddAlbum = () => {
   const navigate = useNavigate();
   const { changeInAlbums, albums } = useContext(AlbumContext);
   const [albumdata, setAlbumdata] = useState("");
+  const disable = useRef(null);
   const addAlbum = () => {
+    disable.current.disabled = true;
     let data = { userId: 1, id: albums.length + 1, title: albumdata };
     fetch("https://jsonplaceholder.typicode.com/albums", {
       method: "POST",
@@ -21,6 +23,7 @@ const AddAlbum = () => {
         let prevAlbum = albums;
         prevAlbum.push(data);
         changeInAlbums(prevAlbum);
+        disable.current.disabled = false;
         // alert("album created");
         navigate("/albums");
       });
@@ -40,10 +43,11 @@ const AddAlbum = () => {
             type="text"
             onChange={handleChage}
             onKeyDown={handleEnter}
-            required
             placeholder="add the album...."
           />
-          <button onClick={addAlbum}>Add</button>
+          <button onClick={addAlbum} ref={disable}>
+            Add
+          </button>
         </div>
       </div>
     </div>

@@ -1,24 +1,28 @@
-## Album Manger 
+## Album Manger
+
 # Concepts covered:
-  There are multiply concepts are covered in this web app, some of the concepts listed below.
-  1. useState
-  2. useEffect
-  3. useContext
-  4. react-router-dom
-  5. scss
-  6. Fetching dummy data and updating it to the Context API
-  
+
+There are multiply concepts are covered in this web app, some of the concepts listed below.
+
+1. useState
+2. useEffect
+3. useContext
+4. useRef
+5. react-router-dom
+6. scss
+7. Fetching dummy data and updating it to the Context API
+
 # Basic Functionality.
-  1. Add album: User can able to add the custom album to the album manager.
-  2. Delete album: User have access to delete any album from the album manager.
-  3. update album: In this app user have access to udpate the existing album
-  4. Read : User can able to read all the existing albums available in the album manager.
-  
+
+1. Add album: User can able to add the custom album to the album manager.
+2. Delete album: User have access to delete any album from the album manager.
+3. update album: In this app user have access to udpate the existing album
+4. Read : User can able to read all the existing albums available in the album manager.
+
 # Hosted at:
-  Used netlify to host the web app.
-  https://flourishing-arithmetic-269954.netlify.app
 
-
+Used netlify to host the web app.
+https://flourishing-arithmetic-269954.netlify.app
 
 ## Available Scripts
 

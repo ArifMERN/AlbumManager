@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { AlbumContext } from "../context/AlbumContext";
 // import { Link } from "react-router-dom";
 
@@ -6,10 +6,13 @@ const Album = (album) => {
   const { changeInAlbums, albums } = useContext(AlbumContext);
 
   const [inputData, setInputData] = useState("");
-
+  const Delete = useRef(null);
+  const Update = useRef(null);
+  const Save = useRef(null);
   // handle Delete to delete the item.
   const handleDelete = async (id) => {
     try {
+      Delete.current.disabled = true;
       await fetch(`https://jsonplaceholder.typicode.com/posts/1`, {
         method: "DELETE",
       }).then((response) => {
@@ -18,6 +21,7 @@ const Album = (album) => {
           changeInAlbums(updatedAlbums);
           alert("deleted the entry");
         });
+        Delete.current.disabled = false;
       });
     } catch (error) {
       console.log(error);
@@ -25,6 +29,7 @@ const Album = (album) => {
   };
   // update
   const handleUpdate = (id, album) => {
+    Update.current.disabled = true;
     let ele = document.getElementById(id).childNodes[0];
     let button = document.getElementById(id).childNodes[1];
     ele.childNodes[0].setAttribute("class", "hideData");
@@ -32,6 +37,7 @@ const Album = (album) => {
     button.childNodes[0].setAttribute("class", "hideData");
     button.childNodes[1].setAttribute("class", "");
     setInputData(album);
+    Update.current.disabled = false;
   };
   // handle change in input
   const handleChange = (e) => {
@@ -41,6 +47,7 @@ const Album = (album) => {
   };
   // console.log(album);
   const handleSave = async (id) => {
+    Save.current.disabled = true;
     let info = {
       id: albums.length + 1,
       title: inputData,
@@ -60,7 +67,7 @@ const Album = (album) => {
         updatedAlbums.find((a) => a.id === id).title = inputData;
         changeInAlbums(updatedAlbums);
       });
-
+    Save.current.disabled = false;
     let ele = document.getElementById(id).childNodes[0];
     let button = document.getElementById(id).childNodes[1];
     ele.childNodes[0].setAttribute("class", "");
@@ -96,6 +103,7 @@ const Album = (album) => {
           onClick={() => {
             handleUpdate(album.id, album.album);
           }}
+          ref={Update}
         >
           Update
         </button>
@@ -104,6 +112,7 @@ const Album = (album) => {
           onClick={() => {
             handleSave(album.id);
           }}
+          ref={Save}
         >
           Save
         </button>
@@ -112,6 +121,7 @@ const Album = (album) => {
           onClick={() => {
             handleDelete(album.id);
           }}
+          ref={Delete}
         >
           Delete
         </button>
